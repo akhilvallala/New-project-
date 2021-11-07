@@ -1,0 +1,57 @@
+TextProcessing techniques:
+
+Source:
+https://www.youtube.com/watch?v=OQxi-d5C9j8&list=PL98nY_tJQXZk-NeS9jqeH2iY4-IvoYbRC
+
+What is stemming and lemmatization?
+Lemmatization converts word to its basic word which has meaning to it.
+Stemming removes prefixes or sufix of the given word which might/might not has any meaning.
+
+Code for Lemmatization in spacy:
+sentence6 = sp(u'compute computer computed computing')
+for word in sentence6:
+    print(word.text,  word.lemma_)
+    
+The output of the script above looks like this:
+compute compute
+computer computer
+computed compute
+computing computing
+
+Source for above Lemmatization code: https://stackabuse.com/python-for-nlp-tokenization-stemming-and-lemmatization-with-spacy-library/
+
+
+There are two types of stemmers:
+1. porter stemmer
+2. Snowball Stemmer
+
+Stemming refers to reducing a word to its root form. While performing natural language processing tasks, you will encounter various scenarios where you find different words with the same root. For instance, compute, computer, computing, computed, etc. You may want to reduce the words to their root form for the sake of uniformity. This is where stemming comes in to play.
+It might be surprising to you but spaCy doesn't contain any function for stemming as it relies on lemmatization only. Therefore, in this section, we will use NLTK for stemming.
+There are two types of stemmers in NLTK: Porter Stemmer and Snowball stemmers. Both of them have been implemented using different algorithms.
+Snowball stemmer is a slightly improved version of the Porter stemmer and is usually preferred over the latter. Let's see snowball stemmer in action:
+
+code for porter stemmer:
+import nltk
+from nltk.stem.porter import *
+stemmer = PorterStemmer()
+tokens = ['compute', 'computer', 'computed', 'computing']
+for token in tokens:
+    print(token + ' --> ' + stemmer.stem(token))
+ The output is as follows:
+ compute --> comput
+computer --> comput
+computed --> comput
+computing --> comput
+
+
+code for Snowball Stemmer:
+from nltk.stem.snowball import SnowballStemmer
+stemmer = SnowballStemmer(language='english')
+tokens = ['compute', 'computer', 'computed', 'computing']
+for token in tokens:
+    print(token + ' --> ' + stemmer.stem(token))
+output:
+compute --> comput
+computer --> comput
+computed --> comput
+computing --> comput
